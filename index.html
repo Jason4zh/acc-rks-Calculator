@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/icon.ico" type="image/x-icon">
+    <title>单曲acc&rks计算工具</title>
+</head>
+
+<body>
+    <div id="enter">
+        定数(具体见页面底部)<input type="number" placeholder="XX.X" step="0.1" style="width: 50px;" id="level"><br>
+        Perfect数量<input type="number" placeholder="XXX" step="1" style="width: 50px;" id="perfect"><br>
+        Good数量<input type="number" placeholder="XXX" step="1" style="width: 50px;" id="good"><br>
+        物量(具体见页面底部)<input type="number" placeholder="XXX" step="1" style="width: 50px;" id="number"><br>
+        准确率(已填perfect与good可不填)<input type="number" placeholder="XX.XX" step="0.01" style="width: 50px;"
+            id="accuracy"><br>
+        <button type="submit" onclick="calculate()" >提交数据</button>
+    </div>
+    <div id="operate">
+        <span id="info"></span>
+    </div>
+    <div id="images">
+        <h2>定数表</h2>
+        <img src="/level.jpg" alt="">
+        <h2>物量表</h2>
+        <img src="/number.jpg" alt="">
+    </div>
+
+
+    <script>
+        function calculate() {
+            document.getElementById("indo").innerHTML = "";
+            var level = document.getElementById("level").valueAsNumber;
+            var perfect = document.getElementById("perfect").valueAsNumber;
+            var good = document.getElementById("good").valueAsNumber;
+            var number = document.getElementById("number").valueAsNumber;
+            var accuracy = document.getElementById("accuracy").valueAsNumber;
+            if (level && number && (accuracy || (perfect && good))) {
+                console.log(1)
+                if (!accuracy) {
+                    accuracy = ((perfect + good * 0.65) / number).toFixed(2);
+
+                }
+                var rks = ((accuracy - 55) / 45 * level).toFixed(2);
+                document.getElementById("info").innerHTML = "准确率(Accuracy):" + accuracy + "%" + "\n" + "单曲rks:" + rks;
+            }
+            else{
+                document.getElementById("info").innerHTML = "数据不完整!"
+            }
+        }
+    </script>
+</body>
+
+</html>
